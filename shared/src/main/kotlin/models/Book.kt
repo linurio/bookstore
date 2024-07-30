@@ -22,6 +22,7 @@ data class Book(
     val description: String,
     val author: BookAuthor,
     val isbn: String,
+    val cover: String,
     val year: Int,
     val publisherId: Int,
     val genreId: Int,

@@ -1,12 +1,12 @@
-package com.example.api.users.dto
+package com.example.api.auth.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateUserDto(
+data class RegisterUserDto(
     val firstName: String,
     val lastName: String,
     val email: String,
-    val passwordHash: String,
-    val avatarUrl: String?,
+    val password: String,
+    val avatarUrl: String? = ""
 )

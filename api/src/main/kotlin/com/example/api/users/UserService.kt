@@ -2,12 +2,10 @@ package com.example.api.users
 
 import com.example.api.users.dto.CreateUserDto
 import com.example.api.users.dto.UpdateUserDto
-import com.example.api.users.dto.UserDto
 import com.example.api.users.entities.User
-import kotlinx.coroutines.Dispatchers
+import com.example.api.utils.dbQuery
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import java.time.LocalDateTime
@@ -19,29 +17,30 @@ class UserService(database: Database) {
         }
     }
 
-    private suspend fun <T> dbQuery(block: suspend () -> T): T =
-        newSuspendedTransaction(Dispatchers.IO) { block() }
-
-    suspend fun create(data: CreateUserDto): Int {
+    suspend fun create(data: CreateUserDto): models.User {
         return dbQuery {
-            val user = User.new {
+            User.new {
                 firstName = data.firstName
                 lastName = data.lastName
                 email = data.email
-                passwordHash = ""
+                passwordHash = data.passwordHash
                 isActivated = false
                 avatarUrl = data.avatarUrl
                 createdAt = LocalDateTime.now()
                 updatedAt = LocalDateTime.now()
-            }
-
-            user.id.value
+            }.toModel()
         }
     }
 
     suspend fun read(id: Int): models.User? {
         return dbQuery {
             User.findById(id)?.toModel()
+        }
+    }
+
+    suspend fun findByEmail(email: String): models.User? {
+        return dbQuery {
+            User.find { Users.email eq email }.singleOrNull()?.toModel()
         }
     }
 
@@ -69,6 +68,9 @@ class UserService(database: Database) {
                 }
                 dto.isActivated?.let { newIsActivated ->
                     it[isActivated] = newIsActivated
+                }
+                dto.refreshToken?.let { newRefreshToken ->
+                    it[refreshToken] = newRefreshToken
                 }
 
                 it[updatedAt] = LocalDateTime.now()

@@ -9,5 +9,6 @@ data class UpdateUserDto(
     val passwordHash: String? = null,
     val isActivated: Boolean? = null,
     val avatarUrl: String? = null,
-    val updatedAt: String? = null
+    val updatedAt: String? = null,
+    val refreshToken: String? = null
 )

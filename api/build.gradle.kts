@@ -4,8 +4,8 @@ repositories {
 
 plugins {
     kotlin("jvm")
-    id("io.ktor.plugin") version "2.3.12"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.ktor)
 }
 
 application {
@@ -33,4 +33,6 @@ dependencies {
     implementation(libs.exposed.dao)
     implementation(libs.logback.classic)
     implementation(libs.postgresql)
+    implementation(libs.dotenv.kotlin)
+    implementation(libs.jbcrypt)
 }

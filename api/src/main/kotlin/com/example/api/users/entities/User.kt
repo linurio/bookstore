@@ -1,15 +1,10 @@
 package com.example.api.users.entities
 
 import com.example.api.users.Users
-import com.example.api.users.dto.UserDto
+import com.example.api.utils.toIsoString
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
-fun LocalDateTime.toIsoString(): String = this.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-fun String.toLocalDateTime(): LocalDateTime = LocalDateTime.parse(this, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 
 class User(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<User>(Users)
@@ -25,10 +20,12 @@ class User(id: EntityID<Int>) : IntEntity(id) {
 
     fun toModel(): models.User {
         return models.User(
+            id.value,
             lastName,
             firstName,
             email,
             avatarUrl,
+            passwordHash,
             isActivated,
             createdAt.toIsoString(),
             updatedAt.toIsoString()

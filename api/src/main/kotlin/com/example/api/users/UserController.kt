@@ -2,12 +2,18 @@ package com.example.api.users
 
 import com.example.api.users.dto.CreateUserDto
 import com.example.api.users.dto.UpdateUserDto
+import com.example.api.utils.ErrorResponse
 import com.example.api.utils.safeCall
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.put
+import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
 fun Route.usersController() {
@@ -15,40 +21,42 @@ fun Route.usersController() {
 
     route("/users") {
         post("") {
-            call.safeCall {
+            call.safeCall({
                 val user = call.receive<CreateUserDto>()
                 val id = userService.create(user)
                 respond(HttpStatusCode.Created, id)
-            }
+            }, ErrorResponse())
         }
 
-        get("/") {
-            call.safeCall {
+        get("") {
+            call.safeCall({
                 val users = userService.readAll()
                 if (users.isNotEmpty()) {
                     respond(HttpStatusCode.OK, users)
                 }
 
                 respond(HttpStatusCode.NotFound)
-            }
+            }, ErrorResponse())
         }
 
         get("/{id}") {
-            call.safeCall {
-                val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
+            call.safeCall({
+                val id =
+                    call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
                 val user = userService.read(id)
                 if (user != null) {
                     call.respond(HttpStatusCode.OK, user)
                 }
 
                 call.respond(HttpStatusCode.NotFound)
-            }
+            }, ErrorResponse())
         }
 
         // TODO: fix this shit
         put("/{id}") {
-            call.safeCall {
-                val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
+            call.safeCall({
+                val id =
+                    call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
                 val user = call.receive<UpdateUserDto>()
                 val updatedUser = userService.update(id, user)
                 if (updatedUser != null) {
@@ -56,15 +64,16 @@ fun Route.usersController() {
                 }
 
                 call.respond(HttpStatusCode.NotFound)
-            }
+            }, ErrorResponse())
         }
 
         delete("/{id}") {
-            call.safeCall {
-                val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
+            call.safeCall({
+                val id =
+                    call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
                 userService.delete(id)
                 call.respond(HttpStatusCode.OK)
-            }
+            }, ErrorResponse())
         }
     }
 }
