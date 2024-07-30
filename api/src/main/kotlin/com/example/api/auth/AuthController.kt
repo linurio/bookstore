@@ -1,7 +1,7 @@
 package com.example.api.auth
 
-import com.example.api.auth.dto.LoginUserDto
-import com.example.api.auth.dto.RegisterUserDto
+import com.example.api.users.dto.CreateUserDto
+import com.example.api.users.dto.LoginUserDto
 import com.example.api.utils.ErrorResponse
 import com.example.api.utils.safeCall
 import io.ktor.http.HttpStatusCode
@@ -20,7 +20,7 @@ fun Route.authController() {
     route("/auth") {
         post("/register") {
             call.safeCall({
-                val data = call.receive<RegisterUserDto>()
+                val data = call.receive<CreateUserDto>()
                 val user = authService.register(data)
 
                 respond(HttpStatusCode.Created, user)

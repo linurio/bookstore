@@ -23,7 +23,7 @@ class UserService(database: Database) {
                 firstName = data.firstName
                 lastName = data.lastName
                 email = data.email
-                passwordHash = data.passwordHash
+                passwordHash = data.password
                 isActivated = false
                 avatarUrl = data.avatarUrl
                 createdAt = LocalDateTime.now()
