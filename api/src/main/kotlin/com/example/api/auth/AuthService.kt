@@ -1,14 +1,12 @@
 package com.example.api.auth
 
-import com.example.api.auth.dto.LoginUserDto
-import com.example.api.auth.dto.RegisterUserDto
 import com.example.api.users.UserService
 import com.example.api.users.dto.CreateUserDto
+import com.example.api.users.dto.LoginUserDto
 import com.example.api.users.dto.UpdateUserDto
 import kotlinx.serialization.Serializable
 import models.User
 import org.mindrot.jbcrypt.BCrypt
-
 
 @Serializable
 data class AuthResult(
@@ -19,13 +17,13 @@ data class AuthResult(
 @Serializable
 sealed class AuthError(val message: String) {
     @Serializable
-    data object PasswordTooShort : AuthError("Password must be at least 8 characters long.")
+    object PasswordTooShort : AuthError("Password must be at least 8 characters long.")
 
     @Serializable
-    data object UserNotFound : AuthError("User not found.")
+    object UserNotFound : AuthError("User not found.")
 
     @Serializable
-    data object IncorrectPassword : AuthError("Incorrect password.")
+    object IncorrectPassword : AuthError("Incorrect password.")
 
     @Serializable
     data class Unknown(val msg: String) : AuthError(msg)
@@ -44,9 +42,9 @@ data class TokenPair(
 )
 
 class AuthService(private val userService: UserService) {
-    suspend fun register(data: RegisterUserDto): AuthResult {
+    suspend fun register(data: CreateUserDto): AuthResult {
         if (data.password.length < 8) {
-            return AuthResult(null, AuthError.PasswordTooShort)
+            return AuthResult(error = AuthError.PasswordTooShort)
         }
 
         val passwordHash = this.hashPassword(data.password)
@@ -57,7 +55,7 @@ class AuthService(private val userService: UserService) {
                 lastName = data.lastName,
                 avatarUrl = data.avatarUrl,
                 email = data.email,
-                passwordHash = passwordHash,
+                password = passwordHash,
             )
         )
 
@@ -67,12 +65,11 @@ class AuthService(private val userService: UserService) {
 
     suspend fun login(data: LoginUserDto): AuthResult {
         val user = this.userService.findByEmail(data.email) ?: return AuthResult(
-            null,
-            AuthError.UserNotFound
+            error = AuthError.UserNotFound
         )
 
         val isPasswordCorrect = this.checkPassword(data.password, user.passwordHash)
-        if (!isPasswordCorrect) return AuthResult(null, AuthError.IncorrectPassword)
+        if (!isPasswordCorrect) return AuthResult(error = AuthError.IncorrectPassword)
 
         val tokenPair = this.generateTokenPair(user.id)
 
@@ -97,5 +94,4 @@ class AuthService(private val userService: UserService) {
     private fun checkPassword(password: String, hashed: String): Boolean {
         return BCrypt.checkpw(password, hashed)
     }
-
 }
