@@ -51,8 +51,7 @@ class AuthService(private val userService: UserService) {
 
         val user = this.userService.create(
             CreateUserDto(
-                firstName = data.firstName,
-                lastName = data.lastName,
+                name = data.name,
                 avatarUrl = data.avatarUrl,
                 email = data.email,
                 password = passwordHash,

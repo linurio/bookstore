@@ -24,8 +24,7 @@ class UserService(database: Database) {
 
         return dbQuery {
             User.new {
-                firstName = data.firstName
-                lastName = data.lastName
+                name = data.name
                 email = data.email
                 passwordHash = data.password
                 isActivated = false
@@ -57,12 +56,8 @@ class UserService(database: Database) {
     suspend fun update(id: Int, dto: UpdateUserDto): models.User? {
         return dbQuery {
             Users.update({ Users.id eq id }) {
-                dto.firstName?.let { newFirstName ->
-                    println(newFirstName)
-                    it[firstName] = newFirstName
-                }
-                dto.lastName?.let { newLastName ->
-                    it[lastName] = newLastName
+                dto.name?.let { newName ->
+                    it[name] = newName
                 }
                 dto.passwordHash?.let { newPasswordHash ->
                     it[passwordHash] = newPasswordHash

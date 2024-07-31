@@ -4,8 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CreateUserDto(
-    val firstName: String,
-    val lastName: String,
+    val name: String,
     val email: String,
     val password: String,
     val avatarUrl: String?,

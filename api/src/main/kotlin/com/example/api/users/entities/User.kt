@@ -9,8 +9,7 @@ import org.jetbrains.exposed.dao.id.EntityID
 class User(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<User>(Users)
 
-    var firstName by Users.firstName
-    var lastName by Users.lastName
+    var name by Users.name
     var email by Users.email
     var passwordHash by Users.passwordHash
     var isActivated by Users.isActivated
@@ -21,8 +20,7 @@ class User(id: EntityID<Int>) : IntEntity(id) {
     fun toModel(): models.User {
         return models.User(
             id.value,
-            lastName,
-            firstName,
+            name,
             email,
             avatarUrl,
             passwordHash,
