@@ -1,6 +1,7 @@
 package models
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class User(
@@ -9,7 +10,7 @@ data class User(
     val lastName: String,
     val email: String,
     val avatarUrl: String?,
-    val passwordHash: String,
+    @Transient val passwordHash: String = "",
     val isActivated: Boolean,
     val createdAt: String,
     val updatedAt: String,
