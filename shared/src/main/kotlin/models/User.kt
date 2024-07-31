@@ -6,8 +6,7 @@ import kotlinx.serialization.Transient
 @Serializable
 data class User(
     val id: Int,
-    val firstName: String,
-    val lastName: String,
+    val name: String,
     val email: String,
     val avatarUrl: String?,
     @Transient val passwordHash: String = "",

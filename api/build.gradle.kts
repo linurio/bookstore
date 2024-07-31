@@ -35,4 +35,5 @@ dependencies {
     implementation(libs.postgresql)
     implementation(libs.dotenv.kotlin)
     implementation(libs.jbcrypt)
+    implementation(libs.flyway.core)
 }

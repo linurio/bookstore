@@ -5,6 +5,7 @@ import com.example.api.plugins.configureJWT
 import com.example.api.plugins.configureKoin
 import com.example.api.plugins.configureRouting
 import com.example.api.plugins.configureSerialization
+import com.example.api.storage.DatabaseService
 import io.github.cdimascio.dotenv.Dotenv
 import io.github.cdimascio.dotenv.DotenvException
 import io.ktor.server.application.Application
@@ -17,6 +18,8 @@ fun main() {
     } catch (e: DotenvException) {
         println(e)
     }
+
+    DatabaseService().migrate()
 
     embeddedServer(
         Netty,

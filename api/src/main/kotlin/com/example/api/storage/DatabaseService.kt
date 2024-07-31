@@ -1,6 +1,7 @@
-package com.example.api
+package com.example.api.storage
 
 import io.github.cdimascio.dotenv.dotenv
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 
 
@@ -22,6 +23,19 @@ class DatabaseService {
             user = dbUser,
             password = dbPass
         )
+    }
+
+    fun migrate() {
+        val flyway = Flyway.configure()
+            .dataSource(
+                "jdbc:postgresql://${dbHost}:${dbPort}/${dbName}",
+                dbUser,
+                dbPass
+            )
+            .baselineOnMigrate(true)
+            .load()
+
+        flyway.migrate()
     }
 
     private fun printConfig() {

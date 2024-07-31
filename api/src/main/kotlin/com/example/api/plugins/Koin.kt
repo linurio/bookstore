@@ -1,7 +1,7 @@
 package com.example.api.plugins
 
-import com.example.api.DatabaseService
 import com.example.api.auth.AuthService
+import com.example.api.storage.DatabaseService
 import com.example.api.users.UserService
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
