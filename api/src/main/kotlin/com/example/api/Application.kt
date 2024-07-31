@@ -6,12 +6,17 @@ import com.example.api.plugins.configureKoin
 import com.example.api.plugins.configureRouting
 import com.example.api.plugins.configureSerialization
 import io.github.cdimascio.dotenv.Dotenv
+import io.github.cdimascio.dotenv.DotenvException
 import io.ktor.server.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
 fun main() {
-    Dotenv.load()
+    try {
+        Dotenv.load()
+    } catch (e: DotenvException) {
+        println(e)
+    }
 
     embeddedServer(
         Netty,

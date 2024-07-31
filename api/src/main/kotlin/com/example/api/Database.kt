@@ -5,11 +5,11 @@ import org.jetbrains.exposed.sql.Database
 
 
 class DatabaseService {
-    private val dbHost: String = dotenv().get("DB_HOST")
-    private val dbPort: String = dotenv().get("DB_PORT")
-    private val dbName: String = dotenv().get("DB_NAME")
-    private val dbUser: String = dotenv().get("DB_USER")
-    private val dbPass: String = dotenv().get("DB_PASS")
+    private val dbHost: String = dotenv().get("DB_HOST") ?: System.getenv("DB_HOST")
+    private val dbPort: String = dotenv().get("DB_PORT") ?: System.getenv("DB_PORT")
+    private val dbName: String = dotenv().get("DB_NAME") ?: System.getenv("DB_NAME")
+    private val dbUser: String = dotenv().get("DB_USER") ?: System.getenv("DB_USER")
+    private val dbPass: String = dotenv().get("DB_PASS") ?: System.getenv("DB_PASS")
 
     val database: Database = connect()
 
