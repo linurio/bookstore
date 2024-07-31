@@ -1,6 +1,5 @@
 package com.example.api.users
 
-import com.example.api.users.dto.CreateUserDto
 import com.example.api.users.dto.UpdateUserDto
 import com.example.api.utils.ErrorResponse
 import com.example.api.utils.safeCall
@@ -11,7 +10,6 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
-import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
@@ -20,14 +18,14 @@ fun Route.usersController() {
     val userService by inject<UserService>()
 
     route("/users") {
-        post("") {
-            call.safeCall({
-                val user = call.receive<CreateUserDto>()
-                val id = userService.create(user)
-                respond(HttpStatusCode.Created, id)
-            }, ErrorResponse())
-        }
-
+//        post("") {
+//            call.safeCall({
+//                val user = call.receive<CreateUserDto>()
+//                val id = userService.create(user)?.id
+//                respond(HttpStatusCode.Created, id)
+//            }, ErrorResponse())
+//        }
+//
         get("") {
             call.safeCall({
                 val users = userService.readAll()

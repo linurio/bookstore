@@ -59,8 +59,13 @@ class AuthService(private val userService: UserService) {
             )
         )
 
-        val tokenPair = this.generateTokenPair(user.id)
-        return AuthResult(AuthSuccess(user, tokenPair))
+        if (user != null) {
+            val tokenPair = this.generateTokenPair(user.id)
+            return AuthResult(AuthSuccess(user, tokenPair))
+        }
+
+
+        return AuthResult(error = AuthError.Unknown("Registration failed. Please try again"))
     }
 
     suspend fun login(data: LoginUserDto): AuthResult {
