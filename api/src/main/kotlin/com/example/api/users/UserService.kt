@@ -17,7 +17,11 @@ class UserService(database: Database) {
         }
     }
 
-    suspend fun create(data: CreateUserDto): models.User {
+    suspend fun create(data: CreateUserDto): models.User? {
+        if (!validateUser(data)) {
+            return null
+        }
+
         return dbQuery {
             User.new {
                 firstName = data.firstName
@@ -84,5 +88,10 @@ class UserService(database: Database) {
         dbQuery {
             User.findById(id)?.delete()
         }
+    }
+
+    // TODO: ...
+    private fun validateUser(user: CreateUserDto): Boolean {
+        return true
     }
 }
