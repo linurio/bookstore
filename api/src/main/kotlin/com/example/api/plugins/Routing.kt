@@ -13,7 +13,6 @@ fun Application.configureRouting() {
             call.respondText("Hello World!")
         }
 
-//        usersController()
         authController()
     }
 }

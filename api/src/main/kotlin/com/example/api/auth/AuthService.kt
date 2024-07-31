@@ -17,13 +17,13 @@ data class AuthResult(
 @Serializable
 sealed class AuthError(val message: String) {
     @Serializable
-    object PasswordTooShort : AuthError("Password must be at least 8 characters long.")
+    data object PasswordTooShort : AuthError("Password must be at least 8 characters long.")
 
     @Serializable
-    object UserNotFound : AuthError("User not found.")
+    data object UserNotFound : AuthError("User not found.")
 
     @Serializable
-    object IncorrectPassword : AuthError("Incorrect password.")
+    data object IncorrectPassword : AuthError("Incorrect password.")
 
     @Serializable
     data class Unknown(val msg: String) : AuthError(msg)
