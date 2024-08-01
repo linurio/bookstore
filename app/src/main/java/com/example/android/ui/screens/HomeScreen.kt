@@ -1,32 +1,41 @@
 package com.example.android.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.android.ui.components.Container
 import com.example.android.ui.components.Greeting
 import com.example.android.ui.components.Navbar
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun MainScreen() {
+fun HomeScreen(
+    navController: NavController
+) {
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = {
+            Box(modifier = Modifier.padding(20.dp)) {
+                Navbar(navController = navController)
+            }
+        }
     ) { innerPadding ->
         Container {
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Greeting(
                     name = "User",
                     modifier = Modifier
                         .padding(innerPadding)
                 )
-                Navbar()
             }
         }
     }

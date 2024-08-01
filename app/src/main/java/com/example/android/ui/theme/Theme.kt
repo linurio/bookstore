@@ -23,7 +23,7 @@ val darkColors = darkColorScheme(
 
 val lightColors = lightColorScheme(
     primary = Accent,
-    secondary = LightBackgroundSecondary,
+    secondary = White,
     background = LightBackground,
     surface = LightBackgroundSecondary,
     onPrimary = LightText,

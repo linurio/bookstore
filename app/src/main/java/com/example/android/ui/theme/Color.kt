@@ -11,7 +11,7 @@ val DarkText = Color(0xFFB4B5AD)
 val DarkTextSecondary = Color(0xFF747474)
 
 // Light
-val LightBackground = Color(0xFFEEF9FF)
+val LightBackground = Color(0xFFEEEEF1)
 val LightBackgroundSecondary = Color(0xFFFFFAE9)
 
 val LightText = Color(0xFF212121)
@@ -19,5 +19,5 @@ val LightTextSecondary = Color(0xFF747474)
 
 // Common
 val Accent = Color(0xFFFACD1E)
-val White = Color(0xFFFFFFFF)  // Adjusted for white color
-val Black = Color(0xFF000000)  // Adjusted for black color
+val White = Color(0xFFFFFFFF)
+val Black = Color(0xFF000000)

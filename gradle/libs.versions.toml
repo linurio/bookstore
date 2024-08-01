@@ -1,6 +1,5 @@
 [versions]
 agp = "8.5.1"
-artifactid = "version"
 dotenvKotlin = "6.4.1"
 flywayCore = "8.0.1"
 jbcrypt = "0.4"
@@ -17,14 +16,17 @@ kotlinxSerializationJson = "1.7.1"
 ktor = "2.3.12"
 logback = "1.4.14"
 exposed = "0.41.1"
+navigation = "2.7.7"
 postgresVersion = "42.7.3"
 koinKtor = "4.0.0-RC1"
 ksp = "2.0.0-1.0.23"
 hilt = "2.44"
-daggerCompiler = "2.51.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flywayCore" }
 jbcrypt = { module = "org.mindrot:jbcrypt", version.ref = "jbcrypt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -42,7 +44,6 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 

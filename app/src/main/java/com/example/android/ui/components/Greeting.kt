@@ -13,7 +13,7 @@ import com.example.android.ui.theme.AndroidTheme
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hi, $name!",
-        modifier = modifier.padding(16.dp),
+        modifier = modifier.padding(top = 10.dp),
         fontSize = 24.sp
     )
 }
