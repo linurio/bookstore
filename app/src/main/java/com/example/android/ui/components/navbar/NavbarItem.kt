@@ -1,4 +1,4 @@
-package com.example.android.ui.components
+package com.example.android.ui.components.navbar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun NavbarItem(
-    dest: String,
+    id: Int,
     isActive: Boolean,
-    onClick: (String) -> Unit,
+    onClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     icon: @Composable (Boolean) -> Unit,
 ) {
@@ -22,7 +22,7 @@ fun NavbarItem(
             .clickable(
                 interactionSource = interactionSource,
                 indication = null
-            ) { onClick(dest) }) {
+            ) { onClick(id) }) {
         icon(isActive)
     }
 }

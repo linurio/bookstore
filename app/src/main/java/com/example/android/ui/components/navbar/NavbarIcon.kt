@@ -1,4 +1,4 @@
-package com.example.android.ui.components
+package com.example.android.ui.components.navbar
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -15,7 +15,7 @@ enum class IconVariant {
 }
 
 @Composable
-fun BaseIcon(
+fun NavbarIcon(
     filled: Int,
     outlined: Int,
     size: Int,
