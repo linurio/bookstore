@@ -2,12 +2,12 @@ package com.example.android.ui.components.navbar
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.example.android.domain.constants.COLORS
 
 enum class IconVariant {
     Filled,
@@ -29,9 +29,9 @@ fun NavbarIcon(
         imageVector = icon,
         contentDescription = null,
         tint = if (variant == IconVariant.Filled) {
-            MaterialTheme.colorScheme.primary
+            COLORS.primary
         } else {
-            MaterialTheme.colorScheme.onBackground
+            COLORS.onBackground
         },
         modifier = modifier.size(size.dp)
     )
