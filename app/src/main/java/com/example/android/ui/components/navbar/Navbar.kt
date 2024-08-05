@@ -41,7 +41,7 @@ fun Navbar(
             .background(
                 Brush.verticalGradient(
                     0.2f to Color.Transparent,
-                    1f to Color.Black.copy(alpha = .8f),
+                    1f to Color(0xFF101010),
                 )
             )
     ) {
@@ -50,7 +50,7 @@ fun Navbar(
                 .clip(RoundedCornerShape(10.dp))
                 .background(COLORS.secondary)
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp),
+                .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             items.forEach { item ->

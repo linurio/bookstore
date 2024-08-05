@@ -18,6 +18,7 @@ ktor = "2.3.12"
 logback = "1.4.14"
 exposed = "0.41.1"
 navigation = "2.7.7"
+paletteVersion = "1.0.0"
 postgresVersion = "42.7.3"
 koinKtor = "4.0.0-RC1"
 ksp = "2.0.0-1.0.23"
@@ -63,6 +64,7 @@ exposed-jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc", version
 exposed-java-time = { group = "org.jetbrains.exposed", name = "exposed-java-time", version.ref = "exposed" }
 exposed-dao = { group = "org.jetbrains.exposed", name = "exposed-dao", version = "0.41.1" }
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+palette = { module = "androidx.palette:palette", version.ref = "paletteVersion" }
 postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresVersion" }
 dotenv-kotlin = { module = "io.github.cdimascio:dotenv-kotlin", version.ref = "dotenvKotlin" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }

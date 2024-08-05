@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.android.R
@@ -28,7 +27,6 @@ import com.example.android.domain.constants.COLORS
 import com.example.android.ui.components.navbar.Icons
 import com.example.android.ui.components.navbar.Navbar
 import com.example.android.ui.components.navbar.NavbarIconWrapper
-import com.example.android.ui.theme.AndroidTheme
 
 data class NavbarItemData(
     val id: Int,
@@ -126,7 +124,7 @@ fun NavigationScreen() {
                     end = innerPadding.calculateEndPadding(LayoutDirection.Ltr),
                     top = innerPadding.calculateTopPadding(),
                     bottom = 0.dp
-                )
+                ),
         ) { page ->
             when (page) {
                 0 -> HomeScreen(scrollState)

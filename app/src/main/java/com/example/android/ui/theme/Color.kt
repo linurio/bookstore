@@ -19,5 +19,3 @@ val LightTextSecondary = Color(0xFF747474)
 
 // Common
 val Accent = Color(0xFFFACD1E)
-val White = Color(0xFFFFFFFF)
-val Black = Color(0xFF000000)
